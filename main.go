@@ -35,12 +35,15 @@ func main() {
 	}
 
 	if *message == "" {
-		fmt.Println(flag.Args())
-		var cmd string
-		for _, str := range flag.Args() {
-			cmd = cmd + str
-		}
-		notify.Notify(cmd)
-		// message = flag.Args()
+		*message = "Command finished"
+	}
+
+	var cmd string
+	for _, str := range flag.Args() {
+		cmd = cmd + str
+	}
+	err := notify.Notify(cmd, *message)
+	if err != nil {
+		fmt.Println(err)
 	}
 }

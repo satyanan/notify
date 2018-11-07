@@ -1,3 +1,5 @@
 package notify
 
-var notifyCmd = "notify-send \"Command finshed!\""
+func notifyCmd(msg string) string {
+	return "notify-send " + msg
+}

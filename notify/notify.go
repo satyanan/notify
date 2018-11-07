@@ -1,25 +1,30 @@
 package notify
 
 import (
-	"fmt"
 	"os/exec"
 	"strings"
 )
 
 // Notify sends a notification to system
-func Notify(cmd string) {
-	execCmd(notifyCmd)
+func Notify(cmd string, msg string) error {
+	err := execCmd(cmd)
+	execCmd(notifyCmd(msg))
+	if err != nil {
+		return err
+	}
+	return nil
+
 }
 
-func execCmd(cmd string) {
-	fmt.Println("command is ", cmd)
+func execCmd(cmd string) error {
 	parts := strings.Fields(cmd)
 	command := parts[0]
 	args := parts[1:len(parts)]
 
-	out, err := exec.Command(command, args...).Output()
+	_, err := exec.Command(command, args...).Output()
 	if err != nil {
-		fmt.Printf("%s", err)
+		return err
 	}
-	fmt.Printf("Out %s", out)
+
+	return nil
 }

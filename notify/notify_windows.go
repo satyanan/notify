@@ -1,3 +1,5 @@
 package notify
 
-var notifyCmd = "toast -t \"notify\" -m \"Command finshed\""
+func notifyCmd(msg string) string {
+	return "toast -t \"notify\" -m \"" + msg + "\""
+}
